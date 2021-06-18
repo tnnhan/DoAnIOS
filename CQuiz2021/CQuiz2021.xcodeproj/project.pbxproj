@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		063656938C4724DFCF1437EB /* Pods_CQuiz2021.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C481C953EF82F57AB8872073 /* Pods_CQuiz2021.framework */; };
+		7D48E91E267CBEFD00E4B21D /* Player_Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48E91D267CBEFD00E4B21D /* Player_Model.swift */; };
 		7D54C8502670E1F1008D3B81 /* Base_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54C84F2670E1F1008D3B81 /* Base_ViewController.swift */; };
 		7D54C8532670E5DA008D3B81 /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54C8522670E5DA008D3B81 /* AppConstant.swift */; };
 		7D54C8572670E740008D3B81 /* Joining_Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54C8562670E740008D3B81 /* Joining_Service.swift */; };
 		7D54C85B2670E76B008D3B81 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54C85A2670E76B008D3B81 /* BaseService.swift */; };
-		7D54C85F2670EE8A008D3B81 /* Player_Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54C85E2670EE8A008D3B81 /* Player_Model.swift */; };
+		7D54C85F2670EE8A008D3B81 /* SetQ_Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54C85E2670EE8A008D3B81 /* SetQ_Model.swift */; };
 		7D6541D626777FFB009A6734 /* JoiningModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6541D526777FFB009A6734 /* JoiningModel.swift */; };
 		7D77EC2A266E319D00EFBCCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D77EC29266E319D00EFBCCD /* AppDelegate.swift */; };
 		7D77EC2C266E319D00EFBCCD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D77EC2B266E319D00EFBCCD /* SceneDelegate.swift */; };
@@ -25,11 +26,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D48E91D267CBEFD00E4B21D /* Player_Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player_Model.swift; sourceTree = "<group>"; };
 		7D54C84F2670E1F1008D3B81 /* Base_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base_ViewController.swift; sourceTree = "<group>"; };
 		7D54C8522670E5DA008D3B81 /* AppConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
 		7D54C8562670E740008D3B81 /* Joining_Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joining_Service.swift; sourceTree = "<group>"; };
 		7D54C85A2670E76B008D3B81 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
-		7D54C85E2670EE8A008D3B81 /* Player_Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player_Model.swift; sourceTree = "<group>"; };
+		7D54C85E2670EE8A008D3B81 /* SetQ_Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetQ_Model.swift; sourceTree = "<group>"; };
 		7D6541D526777FFB009A6734 /* JoiningModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoiningModel.swift; sourceTree = "<group>"; };
 		7D77EC26266E319D00EFBCCD /* CQuiz2021.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CQuiz2021.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D77EC29266E319D00EFBCCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,8 +81,9 @@
 		7D54C85D2670EE79008D3B81 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7D54C85E2670EE8A008D3B81 /* Player_Model.swift */,
+				7D54C85E2670EE8A008D3B81 /* SetQ_Model.swift */,
 				7D6541D526777FFB009A6734 /* JoiningModel.swift */,
+				7D48E91D267CBEFD00E4B21D /* Player_Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -269,13 +272,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D48E91E267CBEFD00E4B21D /* Player_Model.swift in Sources */,
 				7D77EC2E266E319D00EFBCCD /* Register_ViewController.swift in Sources */,
 				7D54C8532670E5DA008D3B81 /* AppConstant.swift in Sources */,
 				7D6541D626777FFB009A6734 /* JoiningModel.swift in Sources */,
 				7D54C8502670E1F1008D3B81 /* Base_ViewController.swift in Sources */,
 				7D77EC2A266E319D00EFBCCD /* AppDelegate.swift in Sources */,
 				7D9C3121267A20260046634B /* Player_TableViewCell.swift in Sources */,
-				7D54C85F2670EE8A008D3B81 /* Player_Model.swift in Sources */,
+				7D54C85F2670EE8A008D3B81 /* SetQ_Model.swift in Sources */,
 				7D54C85B2670E76B008D3B81 /* BaseService.swift in Sources */,
 				7D54C8572670E740008D3B81 /* Joining_Service.swift in Sources */,
 				7D77EC2C266E319D00EFBCCD /* SceneDelegate.swift in Sources */,

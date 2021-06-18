@@ -7,8 +7,9 @@
 
 import Foundation
 class AppConstant {
-    public static var baseURL = "http://172.16.160.122:3000/api/"
+    public static var baseHost = "http://172.16.160.122:3030"
+    public static var baseURL = "\(baseHost)/api/"
     public static var uploadAvatarUrl =  "\(baseURL)uploadFile"
     public static var joinUrl = "\(baseURL)join"
-    public static var baseHost = "http://172.16.160.122:3000"
+    
 }

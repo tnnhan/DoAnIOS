@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftyJSON
+import SocketIO
 
 class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var backgroundGradientView: UIView!
@@ -15,16 +16,15 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
     @IBOutlet weak var imgGender: UIImageView!
     @IBOutlet weak var btnUpload: UIButton!
     @IBOutlet weak var imgView: UIView!
-    
     @IBOutlet weak var txtNickName: UITextField!
     @IBOutlet weak var txtPin: UITextField!
    
-    
+    let manager = SocketManager(socketURL: URL(string: AppConstant.baseHost)!, config: [.log(true), .compress])
+    let sb = UIStoryboard(name: "Main", bundle: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         design()
-
     }
     
     func design() {
@@ -65,30 +65,21 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
             let joiningTask = URLSession.shared.dataTask(with: request, completionHandler: { data , response, error in
                 guard error == nil else { print("error"); return }
                 guard let data = data else { return }
-                
                 do{
                     guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any] else { return }
-                    print(json["result"])
                     if( json["result"] as! Int == 1 ){
-                        let sb = UIStoryboard(name: "Main", bundle: nil)
                         DispatchQueue.main.async {
-                            let playerSb = sb.instantiateViewController(withIdentifier: "PLAYER") as? PlayerViewController
-                            self.navigationController?.pushViewController(playerSb!, animated: true)
+                            self.goToConnectServer()
                         }
                     }else{
-                        print(json["result"])
+                        let msg = json["message"] as! String
+                        self.displayAlert(title: "Thong bao", messg: msg)
                     }
                     
                 }catch let error { print(error.localizedDescription) }
             })
             joiningTask.resume()
         }
-        
-        
-        
-//        let message = BaseService.uploadFile(urlStr: AppConstant.uploadAvatarUrl, dataFile: (imgAvatar.image?.pngData())!, fileName: "avatar")
-//        displayAlert(title: "Thong bao", messg: "Thanh cong")
-        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -107,7 +98,6 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
         let colorBottom  =  UIColor(red: 215.0/255.0, green: 236.0/255.0, blue: 217.0/255.0, alpha: 1.0).cgColor
         let colorMedium = UIColor(red: 246.0/255.0, green: 246.0/255.0, blue: 235.0/255.0, alpha: 1.0).cgColor
         let colorTop = UIColor(red: 245.0/255.0, green: 213.0/255.0, blue: 245.0/255.0, alpha: 1.0).cgColor
-
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [colorTop, colorMedium, colorBottom]
         gradientLayer.locations = [0.0, 0.5, 1.0]
@@ -115,6 +105,27 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
         gradientLayer.frame = self.view.bounds
         self.view.layer.insertSublayer(gradientLayer, at:0)
+    }
+    
+    func goToConnectServer(){
+        let socket = manager.defaultSocket
+        socket.on("connect") { data, ack in
+            socket.emit("C_AddGroup_S", ["setq_pin":self.txtPin.text!])
+        }
+        socket.on("S_SendPlayerList_C") { [self] data, ack in
+            var playerClassList:[Player] = []
+            let nSArray = data as NSArray
+            for item in (nSArray[0] as! NSArray) {
+                let disArray = item as! NSDictionary
+                let player =  Player(player_nickname: disArray["player_nickname"] as! String, setq_id: disArray["setq_id"] as! String,  player_avatar: disArray["player_avatar"] as! String, player_flag:disArray["player_flag"] as! Int)
+                playerClassList.append(player)
+
+            }
+            let playerSb = self.sb.instantiateViewController(withIdentifier: "PLAYER") as? PlayerViewController
+            playerSb?.playerArr = playerClassList
+            self.navigationController?.pushViewController(playerSb!, animated: true)
+        }
+        socket.connect()
     }
 
 }

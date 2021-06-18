@@ -42,27 +42,40 @@ class PlayerViewController: UIViewController, UITableViewDataSource, UITableView
 //            }
             
         }
-        
-        
-        
-        
-        
-        playerArr = [
-           Player(_id: "1", setq_created_by: "Test", setq_description: "Test", setq_image: "Test", setq_title: "Test", setq_visibility: "Test")
-        ]
         tblPlayer.dataSource = self
         tblPlayer.delegate = self
         lblPlayerList.text = "DANH SÁCH NGƯỜI CHƠI"
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        playerArr.count
+        return playerArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let playerCell = tblPlayer.dequeueReusableCell(withIdentifier: "PLAYER_CELL") as? Player_TableViewCell
-        playerCell?.lblNickName.text = playerArr[indexPath.row].setq_description
+        playerCell?.lblNickName.text = playerArr[indexPath.row].player_nickname
         return playerCell!
+    }
+    
+    func goToConnectServer(){
+        let socket = manager.defaultSocket
+//        socket.on("connect") { data, ack in
+//            socket.emit("C_AddGroup_S", ["setq_pin":self.txtPin.text!])
+//        }
+//        socket.on("S_SendPlayerList_C") { [self] data, ack in
+//            var playerClassList:[Player] = []
+//            let nSArray = data as NSArray
+//            for item in (nSArray[0] as! NSArray) {
+//                let disArray = item as! NSDictionary
+//                let player =  Player(player_nickname: disArray["player_nickname"] as! String, setq_id: disArray["setq_id"] as! String,  player_avatar: disArray["player_avatar"] as! String, player_flag:disArray["player_flag"] as! String)
+//                playerClassList.append(player)
+//
+//            }
+//            let playerSb = self.sb.instantiateViewController(withIdentifier: "PLAYER") as? PlayerViewController
+//            playerSb?.playerArr = playerClassList
+//            self.navigationController?.pushViewController(playerSb!, animated: true)
+//        }
+        socket.connect()
     }
 
 }
