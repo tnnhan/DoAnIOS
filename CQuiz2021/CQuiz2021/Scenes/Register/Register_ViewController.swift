@@ -73,7 +73,9 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
                         }
                     }else{
                         let msg = json["message"] as! String
-                        self.displayAlert(title: "Thong bao", messg: msg)
+                        DispatchQueue.main.async {
+                            self.displayAlert(title: "Thông báo", messg: msg)
+                        }
                     }
                     
                 }catch let error { print(error.localizedDescription) }
@@ -86,7 +88,7 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
         if let image = info[UIImagePickerController.InfoKey(rawValue: UIImagePickerController.InfoKey.originalImage.rawValue)] as? UIImage {
             imgAvatar.image = image
         }
-        self.dismiss(animated: true, completion: nil  )
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
