@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SocketIO
 import SwiftyJSON
 
 class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -19,19 +18,13 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
     
     @IBOutlet weak var txtNickName: UITextField!
     @IBOutlet weak var txtPin: UITextField!
-    
-    let manager = SocketManager(socketURL: URL(string: AppConstant.baseHost)!, config: [.log(true), .compress])
+   
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         design()
-//        let socket = manager.defaultSocket
-//        socket.connect()
-//        socket.on("S_Sendto_C") {
-//            data, ack in
-//            print("Nhan du lieu:  \(data)")
-//        }
+
     }
     
     func design() {
@@ -77,26 +70,13 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
                     guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any] else { return }
                     print(json["result"])
                     if( json["result"] as! Int == 1 ){
-                        
-                        
-                        
-//                        DispatchQueue.main.async {
-//                            do{
-//                                let imgData = try! Data(contentsOf: URL(string: urlHinh)!)
-//                                self.img_Avatar.image = UIImage(data: imgData)
-//                            }catch{}
-//
-//                            self.lbl_HoTen.text = user!["Name"] as? String
-//                            self.lbl_Email.text = user!["Address"] as? String
-                            
-//                        }
+                        let sb = UIStoryboard(name: "Main", bundle: nil)
+                        DispatchQueue.main.async {
+                            let playerSb = sb.instantiateViewController(withIdentifier: "PLAYER") as? PlayerViewController
+                            self.navigationController?.pushViewController(playerSb!, animated: true)
+                        }
                     }else{
                         print(json["result"])
-//                        DispatchQueue.main.async {
-//                            let alertView = UIAlertController(title: "Thong bao", message: (json["errMsg"] as! String), preferredStyle: .alert)
-//                            alertView.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//                            self.present(alertView, animated: true, completion: nil)
-//                        }
                     }
                     
                 }catch let error { print(error.localizedDescription) }

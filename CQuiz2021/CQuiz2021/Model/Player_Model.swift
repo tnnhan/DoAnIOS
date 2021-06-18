@@ -38,27 +38,26 @@
 //}
 
 import Foundation
-class Player_Model {
-    struct Players:Decodable{
-        var kq:Int
-        var PlayerList:[Player]
-    }
 
-    struct Player:Decodable{
-        var _id: String
-        var setq_created_by:String
-        var setq_description:String
-        var setq_image:String
-        var setq_title:String
-        var setq_visibility:String
-        
-        init(id:String, name:String, image:String) {
-            self._id = id
-            self.setq_created_by = name
-            self.setq_description = image
-            self.setq_image = name
-            self.setq_title = image
-            self.setq_visibility = name
-        }
+struct Player_Model:Decodable{
+    var kq:Int
+    var PlayerList:[Player]
+}
+
+struct Player:Decodable{
+    var _id: String
+    var setq_created_by:String
+    var setq_description:String
+    var setq_image:String
+    var setq_title:String
+    var setq_visibility:String
+    
+    init(_id:String, setq_created_by:String, setq_description:String, setq_image:String, setq_title:String, setq_visibility:String) {
+        self._id = _id
+        self.setq_created_by = setq_created_by
+        self.setq_description = setq_description
+        self.setq_image = setq_image
+        self.setq_title = setq_title
+        self.setq_visibility = setq_visibility
     }
 }

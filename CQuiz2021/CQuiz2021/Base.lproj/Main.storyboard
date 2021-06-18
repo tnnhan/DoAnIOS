@@ -125,14 +125,64 @@
         <!--Player View Controller-->
         <scene sceneID="9TN-xg-pRC">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="3Iz-Py-V2u" customClass="PlayerViewController" customModule="CQuiz2021" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PLAYER" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="3Iz-Py-V2u" customClass="PlayerViewController" customModule="CQuiz2021" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zBf-UX-Yv3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="PLAYER_CELL" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mw6-Lt-ATe">
+                                <rect key="frame" x="0.0" y="115.5" width="414" height="746.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PLAYER_CELL" id="uvb-3q-ruq" customClass="Player_TableViewCell" customModule="CQuiz2021" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uvb-3q-ruq" id="wGA-0z-cb8" customClass="Player_TableViewCell" customModule="CQuiz2021" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QqW-70-c9v">
+                                                    <rect key="frame" x="186" y="11" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="lblNickName" destination="QqW-70-c9v" id="sMk-vY-UW7"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ue5-9u-9YU">
+                                <rect key="frame" x="0.0" y="88" width="414" height="27.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" secondItem="ue5-9u-9YU" secondAttribute="width" multiplier="1:15" id="bip-jb-Jx9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="iNb-bU-l6C"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mw6-Lt-ATe" firstAttribute="trailing" secondItem="ue5-9u-9YU" secondAttribute="trailing" id="0jT-yy-VkN"/>
+                            <constraint firstItem="ue5-9u-9YU" firstAttribute="leading" secondItem="iNb-bU-l6C" secondAttribute="leading" id="1XC-F4-luy"/>
+                            <constraint firstItem="iNb-bU-l6C" firstAttribute="trailing" secondItem="ue5-9u-9YU" secondAttribute="trailing" id="4AW-Xe-znl"/>
+                            <constraint firstItem="mw6-Lt-ATe" firstAttribute="leading" secondItem="ue5-9u-9YU" secondAttribute="leading" id="4C1-9i-cwd"/>
+                            <constraint firstItem="ue5-9u-9YU" firstAttribute="top" secondItem="iNb-bU-l6C" secondAttribute="top" id="K8g-ag-pdx"/>
+                            <constraint firstItem="iNb-bU-l6C" firstAttribute="bottom" secondItem="mw6-Lt-ATe" secondAttribute="bottom" id="Kwy-rK-nau"/>
+                            <constraint firstItem="mw6-Lt-ATe" firstAttribute="top" secondItem="ue5-9u-9YU" secondAttribute="bottom" id="pIZ-6K-34d"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4Sb-sz-Z3f"/>
+                    <connections>
+                        <outlet property="lblPlayerList" destination="ue5-9u-9YU" id="nUt-iD-PEq"/>
+                        <outlet property="tblPlayer" destination="mw6-Lt-ATe" id="rAC-ku-E8M"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ez9-49-2f8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
