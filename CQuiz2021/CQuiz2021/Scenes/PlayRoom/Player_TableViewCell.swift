@@ -8,7 +8,9 @@
 import UIKit
 
 class Player_TableViewCell: UITableViewCell {
+    
 
+    @IBOutlet weak var imgAvatar: UIImageView!
     @IBOutlet weak var lblNickName: UILabel!
     
     override func awakeFromNib() {
@@ -21,5 +23,4 @@ class Player_TableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

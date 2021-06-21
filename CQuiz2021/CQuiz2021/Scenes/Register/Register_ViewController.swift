@@ -110,24 +110,9 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
     }
     
     func goToConnectServer(){
-        let socket = manager.defaultSocket
-        socket.on("connect") { data, ack in
-            socket.emit("C_AddGroup_S", ["setq_pin":self.txtPin.text!])
-        }
-        socket.on("S_SendPlayerList_C") { [self] data, ack in
-            var playerClassList:[Player] = []
-            let nSArray = data as NSArray
-            for item in (nSArray[0] as! NSArray) {
-                let disArray = item as! NSDictionary
-                let player =  Player(player_nickname: disArray["player_nickname"] as! String, setq_id: disArray["setq_id"] as! String,  player_avatar: disArray["player_avatar"] as! String, player_flag:disArray["player_flag"] as! Int)
-                playerClassList.append(player)
-
-            }
-            let playerSb = self.sb.instantiateViewController(withIdentifier: "PLAYER") as? PlayerViewController
-            playerSb?.playerArr = playerClassList
-            self.navigationController?.pushViewController(playerSb!, animated: true)
-        }
-        socket.connect()
+        let playerSb = self.sb.instantiateViewController(withIdentifier: "PLAYER") as? PlayerViewController
+        playerSb?.txtPin = self.txtPin.text!
+        self.navigationController?.pushViewController(playerSb!, animated: true)
     }
 
 }
