@@ -18,7 +18,7 @@ struct Player:Decodable{
     var player_avatar:String
     var player_flag: Int
     
-    init(player_nickname:String, setq_id:String, player_avatar:String, player_flag:Int) {
+    init(_ player_nickname:String,_ setq_id:String, _ player_avatar:String, _ player_flag:Int) {
         self.player_nickname = player_nickname
         self.setq_id = setq_id
         self.player_avatar = player_avatar

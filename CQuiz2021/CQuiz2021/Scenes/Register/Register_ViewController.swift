@@ -19,12 +19,16 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
     @IBOutlet weak var txtNickName: UITextField!
     @IBOutlet weak var txtPin: UITextField!
    
-    let manager = SocketManager(socketURL: URL(string: AppConstant.baseHost)!, config: [.log(true), .compress])
     let sb = UIStoryboard(name: "Main", bundle: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         design()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setGradientBackground()
+        super.viewWillAppear(animated)
     }
     
     func design() {
@@ -51,6 +55,7 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
     }
     
     @IBAction func submit(_ sender: Any) {
+        self.goToPlayerScreen()// Test
         DispatchQueue.main.async {
             let url = URL(string: AppConstant.joinUrl)
             var request = URLRequest(url: url!)
@@ -69,7 +74,7 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
                     guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any] else { return }
                     if( json["result"] as! Int == 1 ){
                         DispatchQueue.main.async {
-                            self.goToConnectServer()
+                            self.goToPlayerScreen()
                         }
                     }else{
                         let msg = json["message"] as! String
@@ -90,11 +95,6 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
         }
         self.dismiss(animated: true, completion: nil)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        setGradientBackground()
-        super.viewWillAppear(animated)
-    }
 
     func setGradientBackground() {
         let colorBottom  =  UIColor(red: 215.0/255.0, green: 236.0/255.0, blue: 217.0/255.0, alpha: 1.0).cgColor
@@ -109,11 +109,10 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
         self.view.layer.insertSublayer(gradientLayer, at:0)
     }
     
-    func goToConnectServer(){
-        let playerSb = self.sb.instantiateViewController(withIdentifier: "PLAYER") as? PlayerViewController
-        playerSb?.txtPin = self.txtPin.text!
-        self.navigationController?.pushViewController(playerSb!, animated: true)
+    func goToPlayerScreen(){
+        let vc = self.sb.instantiateViewController(withIdentifier: "PlayerStoryboardID") as! Player_ViewController
+        vc.txtPin = self.txtPin.text!
+        self.navigationController?.pushViewController(vc, animated: true)
     }
-
 }
 

@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import SocketIO
 
 class Base_ViewController: UIViewController {
 
+    let manager = SocketManager(socketURL: URL(string: AppConstant.baseHost)!, config: [.log(true), .compress])
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
