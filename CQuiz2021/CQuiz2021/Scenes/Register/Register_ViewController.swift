@@ -18,12 +18,13 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
     @IBOutlet weak var imgView: UIView!
     @IBOutlet weak var txtNickName: UITextField!
     @IBOutlet weak var txtPin: UITextField!
-   
+    
     let sb = UIStoryboard(name: "Main", bundle: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         design()
+        navigationController?.navigationBar.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +56,6 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
     }
     
     @IBAction func submit(_ sender: Any) {
-        self.goToPlayerScreen()// Test
         DispatchQueue.main.async {
             let url = URL(string: AppConstant.joinUrl)
             var request = URLRequest(url: url!)
@@ -74,7 +74,10 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
                     guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any] else { return }
                     if( json["result"] as! Int == 1 ){
                         DispatchQueue.main.async {
-                            self.goToPlayerScreen()
+//                            let nSArray = json["data"] as! NSArray
+                            let nSArray = json["data"] as! NSDictionary
+                            var setq_title = nSArray["setq_title"] as! String
+                            self.goToPlayerScreen(title:setq_title)
                         }
                     }else{
                         let msg = json["message"] as! String
@@ -109,9 +112,10 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
         self.view.layer.insertSublayer(gradientLayer, at:0)
     }
     
-    func goToPlayerScreen(){
+    func goToPlayerScreen(title:String){
         let vc = self.sb.instantiateViewController(withIdentifier: "PlayerStoryboardID") as! Player_ViewController
         vc.txtPin = self.txtPin.text!
+        vc.txtTitle = title
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -10,15 +10,20 @@ import UIKit
 class Player_ViewController: Base_ViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tbvPlayer: UITableView!
+    @IBOutlet weak var lblRoomTitle: UILabel!
+    @IBOutlet weak var lblPlayers: UILabel!
     
     var playerArr:[Player] = []
     var txtPin:String?
+    var txtTitle:String?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tbvPlayer.delegate = self
         self.tbvPlayer.dataSource = self
-        // Do any additional setup after loading the view.
+        lblRoomTitle.text = self.txtTitle
+        navigationController?.navigationBar.backItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,14 +33,25 @@ class Player_ViewController: Base_ViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return playerArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tbvPlayer.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath) as! Player_TableViewCell
-        cell.lblNickName.text = "Tran Ngoc Nhan \(indexPath.row)"
+        cell.lblNickName.text = playerArr[indexPath.row].player_nickname
         cell.imgAvatar.image = UIImage(named: "user")
+//        cell.imgAvatar.image = UIImage(named: playerArr[indexPath.row].player_avatar)
+        
+        //Color for last row
+        let totalRows = tableView.numberOfRows(inSection: indexPath.section)
+        if indexPath.row == totalRows - 1 {
+            cell.backgroundColor = UIColor.random
+        } else {
+            cell.backgroundColor = UIColor.white
+        }
+        
         return cell
     }
     
@@ -54,6 +70,7 @@ class Player_ViewController: Base_ViewController, UITableViewDelegate, UITableVi
                 let player =  Player(disArray["player_nickname"] as! String,disArray["setq_id"] as! String,disArray["player_avatar"] as! String,disArray["player_flag"] as! Int)
                 playerArr.append(player)
             }
+            lblPlayers.text = String(playerArr.count)
             //prevent flickers
             UIView.performWithoutAnimation {
                 self.tbvPlayer.reloadData()
@@ -65,17 +82,18 @@ class Player_ViewController: Base_ViewController, UITableViewDelegate, UITableVi
                 }
             }
         }
+        socket.on("PlayGame") {data, ack in
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "PLAYGAME") as! PlayGame_ViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         socket.connect()
     }
-    
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension UIColor {
+    static var random: UIColor {
+        srand48(Int(arc4random()))
+        return UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1.0)
     }
-    */
-
 }
