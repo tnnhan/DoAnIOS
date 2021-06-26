@@ -18,41 +18,16 @@ class Player_ViewController: Base_ViewController, UITableViewDelegate, UITableVi
     var playerArr:[Player] = []
     var txtPin:String?
     var txtTitle:String?
-    
-    var gl:CAGradientLayer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tbvPlayer.delegate = self
         self.tbvPlayer.dataSource = self
         lblRoomTitle.text = self.txtTitle
-        viewPhong.backgroundColor = UIColor(red: 241/255, green: 242/255, blue: 243/255, alpha: 1)
-        viewSoNguoiChoi.backgroundColor = UIColor(red: 241/255, green: 242/255, blue: 243/255, alpha: 1)
-        
-        let colorTop = UIColor(red: 192.0 / 255.0, green: 38.0 / 255.0, blue: 42.0 / 255.0, alpha: 1.0).cgColor
-                let colorBottom = UIColor(red: 35.0 / 255.0, green: 2.0 / 255.0, blue: 2.0 / 255.0, alpha: 1.0).cgColor
-        self.gl = CAGradientLayer()
-        self.gl.colors = [colorTop, colorBottom]
-        self.gl.locations = [0.0, 1.0]
-//        lblRoomTitle.textColor =
-        
-    }
-    
-    func gradientColor(bounds: CGRect, gradientLayer :CAGradientLayer) -> UIColor? {
-    //We are creating UIImage to get gradient color.
-          UIGraphicsBeginImageContext(gradientLayer.bounds.size)
-          gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
-          let image = UIGraphicsGetImageFromCurrentImageContext()
-          UIGraphicsEndImageContext()
-          return UIColor(patternImage: image!)
-    }
-    func getGradientLayer(bounds : CGRect) -> CAGradientLayer{
-        let gradient = CAGradientLayer()
-        gradient.frame = bounds
-        gradient.colors = [UIColor.red.cgColor, UIColor.blue.cgColor]
-        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
-        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
-        return gradient
+        viewPhong.layer.cornerRadius = 10
+        viewSoNguoiChoi.layer.cornerRadius = 10
+        let gradient = getGradientLayer(bounds: lblRoomTitle.bounds)
+        lblRoomTitle.textColor = gradientColor(bounds: lblRoomTitle.bounds, gradientLayer: gradient)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,15 +75,17 @@ class Player_ViewController: Base_ViewController, UITableViewDelegate, UITableVi
                 playerArr.append(player)
             }
             lblPlayers.text = String(playerArr.count)
+            let gradient = getGradientLayer(bounds: lblPlayers.bounds)
+            lblPlayers.textColor = gradientColor(bounds: lblPlayers.bounds, gradientLayer: gradient)
             //prevent flickers
             UIView.performWithoutAnimation {
                 self.tbvPlayer.reloadData()
                 self.tbvPlayer.beginUpdates()
                 self.tbvPlayer.endUpdates()
-                DispatchQueue.main.async {
-                    let indexPath = IndexPath(row: self.playerArr.count-1, section: 0)
-                    self.tbvPlayer.scrollToRow(at: indexPath, at: .bottom, animated: true)
-                }
+//                DispatchQueue.main.async {
+//                    let indexPath = IndexPath(row: self.playerArr.count-1, section: 0)
+//                    self.tbvPlayer.scrollToRow(at: indexPath, at: .bottom, animated: true)
+//                }
             }
         }
         socket.on("PlayGame") {data, ack in
@@ -117,6 +94,23 @@ class Player_ViewController: Base_ViewController, UITableViewDelegate, UITableVi
             self.navigationController?.pushViewController(vc, animated: true)
         }
         socket.connect()
+    }
+    
+    func gradientColor(bounds: CGRect, gradientLayer :CAGradientLayer) -> UIColor? {
+          UIGraphicsBeginImageContext(gradientLayer.bounds.size)
+          gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+          let image = UIGraphicsGetImageFromCurrentImageContext()
+          UIGraphicsEndImageContext()
+          return UIColor(patternImage: image!)
+    }
+    
+    func getGradientLayer(bounds : CGRect) -> CAGradientLayer{
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds
+        gradient.colors = [UIColor.systemPink.cgColor,UIColor.purple.cgColor]
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+        return gradient
     }
 }
 
