@@ -9,17 +9,15 @@ import UIKit
 
 class Player_TableViewCell: UITableViewCell {
 
+    @IBOutlet weak var viewPlayerCell: UIView!
     @IBOutlet weak var imgAvatar: UIImageView!
     @IBOutlet weak var lblNickName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

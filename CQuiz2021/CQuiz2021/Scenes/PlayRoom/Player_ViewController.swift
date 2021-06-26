@@ -12,18 +12,47 @@ class Player_ViewController: Base_ViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var tbvPlayer: UITableView!
     @IBOutlet weak var lblRoomTitle: UILabel!
     @IBOutlet weak var lblPlayers: UILabel!
+    @IBOutlet weak var viewSoNguoiChoi: UIView!
+    @IBOutlet weak var viewPhong: UIView!
     
     var playerArr:[Player] = []
     var txtPin:String?
     var txtTitle:String?
     
-    
+    var gl:CAGradientLayer!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tbvPlayer.delegate = self
         self.tbvPlayer.dataSource = self
         lblRoomTitle.text = self.txtTitle
-        navigationController?.navigationBar.backItem
+        viewPhong.backgroundColor = UIColor(red: 241/255, green: 242/255, blue: 243/255, alpha: 1)
+        viewSoNguoiChoi.backgroundColor = UIColor(red: 241/255, green: 242/255, blue: 243/255, alpha: 1)
+        
+        let colorTop = UIColor(red: 192.0 / 255.0, green: 38.0 / 255.0, blue: 42.0 / 255.0, alpha: 1.0).cgColor
+                let colorBottom = UIColor(red: 35.0 / 255.0, green: 2.0 / 255.0, blue: 2.0 / 255.0, alpha: 1.0).cgColor
+        self.gl = CAGradientLayer()
+        self.gl.colors = [colorTop, colorBottom]
+        self.gl.locations = [0.0, 1.0]
+//        lblRoomTitle.textColor =
+        
+    }
+    
+    func gradientColor(bounds: CGRect, gradientLayer :CAGradientLayer) -> UIColor? {
+    //We are creating UIImage to get gradient color.
+          UIGraphicsBeginImageContext(gradientLayer.bounds.size)
+          gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+          let image = UIGraphicsGetImageFromCurrentImageContext()
+          UIGraphicsEndImageContext()
+          return UIColor(patternImage: image!)
+    }
+    func getGradientLayer(bounds : CGRect) -> CAGradientLayer{
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds
+        gradient.colors = [UIColor.red.cgColor, UIColor.blue.cgColor]
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+        return gradient
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,13 +74,13 @@ class Player_ViewController: Base_ViewController, UITableViewDelegate, UITableVi
 //        cell.imgAvatar.image = UIImage(named: playerArr[indexPath.row].player_avatar)
         
         //Color for last row
-        let totalRows = tableView.numberOfRows(inSection: indexPath.section)
-        if indexPath.row == totalRows - 1 {
-            cell.backgroundColor = UIColor.random
-        } else {
-            cell.backgroundColor = UIColor.white
-        }
-        
+//        let totalRows = tableView.numberOfRows(inSection: indexPath.section)
+//        if indexPath.row == totalRows - 1 {
+//            cell.backgroundColor = UIColor.random
+//        } else {
+//            cell.backgroundColor = UIColor.white
+//        }
+        cell.backgroundColor = UIColor(red: 241/255, green: 242/255, blue: 243/255, alpha: 1)
         return cell
     }
     
