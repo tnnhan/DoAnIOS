@@ -16,11 +16,16 @@ class Player_ViewController: Base_ViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var viewPhong: UIView!
     
     var playerArr:[Player] = []
+    var question:Question?
+    var answer:Answer?
+    var answerArr:[Answer] = []
     var txtPin:String?
     var txtTitle:String?
+    var player_id:String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = false
         self.tbvPlayer.delegate = self
         self.tbvPlayer.dataSource = self
         lblRoomTitle.text = self.txtTitle
@@ -89,8 +94,28 @@ class Player_ViewController: Base_ViewController, UITableViewDelegate, UITableVi
             }
         }
         socket.on("PlayGame") {data, ack in
+           
+            let nSArray = data as NSArray
+                let resultArray = nSArray[0] as! NSArray
+                let disArray = resultArray[0] as! NSDictionary
+                self.question = Question(disArray["_id"] as! String, disArray["question_flag"] as! Int, disArray["question_image"] as! String, disArray["question_title"] as! String, disArray["setq_id"] as! String, disArray["timer_id"] as! String)
+                
+            
+            for item in (resultArray[1] as! NSArray) {
+                let answerArray = item as! NSDictionary
+                self.answer = Answer(answerArray["_id"] as! String, String(answerArray["answer_flag"] as! Int), answerArray["answer_title"] as! String, answerArray["question_id"] as! String)
+                if self.answer != nil{
+                    self.answerArr.append(self.answer!)
+                }
+            }
+            print(self.question)
+            print(self.answerArr)
+
             let sb = UIStoryboard(name: "Main", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "PLAYGAME") as! PlayGame_ViewController
+            vc.question = self.question
+            vc.answerArr = self.answerArr
+            vc.player_id = self.player_id!
             self.navigationController?.pushViewController(vc, animated: true)
         }
         socket.connect()

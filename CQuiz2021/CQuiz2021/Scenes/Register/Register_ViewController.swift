@@ -18,6 +18,7 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
     @IBOutlet weak var imgView: UIView!
     @IBOutlet weak var txtNickName: UITextField!
     @IBOutlet weak var txtPin: UITextField!
+    var player_id:String = ""
     
     let sb = UIStoryboard(name: "Main", bundle: nil)
     
@@ -72,6 +73,7 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
                 guard let data = data else { return }
                 do{
                     guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any] else { return }
+                    self.player_id = json["player_id"] as! String
                     if( json["result"] as! Int == 1 ){
                         DispatchQueue.main.async {
 //                            let nSArray = json["data"] as! NSArray
@@ -116,6 +118,7 @@ class ViewController: Base_ViewController, UIImagePickerControllerDelegate, UINa
         let vc = self.sb.instantiateViewController(withIdentifier: "PlayerStoryboardID") as! Player_ViewController
         vc.txtPin = self.txtPin.text!
         vc.txtTitle = title
+        vc.player_id = self.player_id
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

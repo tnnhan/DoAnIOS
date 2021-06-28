@@ -11,5 +11,6 @@ class AppConstant {
     public static var baseURL = "\(baseHost)/api/"
     public static var uploadAvatarUrl =  "\(baseURL)uploadFile"
     public static var joinUrl = "\(baseURL)join"
+    public static var getUrlImageQuestionUrl = "\(baseHost)/upload/"
     
 }

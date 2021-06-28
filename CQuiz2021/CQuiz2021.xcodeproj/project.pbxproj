@@ -10,6 +10,10 @@
 		063656938C4724DFCF1437EB /* Pods_CQuiz2021.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C481C953EF82F57AB8872073 /* Pods_CQuiz2021.framework */; };
 		7D1A8B982682D5AE00A2C5A2 /* Player_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1A8B972682D5AE00A2C5A2 /* Player_ViewController.swift */; };
 		7D3A0BF02680C5400070801B /* Player_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3A0BEF2680C5400070801B /* Player_TableViewCell.swift */; };
+		7D3F7AAE2689E715009522A0 /* Question_Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3F7AAD2689E715009522A0 /* Question_Model.swift */; };
+		7D3F7AB12689E7FA009522A0 /* Answer_Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3F7AB02689E7FA009522A0 /* Answer_Model.swift */; };
+		7D3F7AB42689F863009522A0 /* ResultQuestionNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3F7AB32689F863009522A0 /* ResultQuestionNumberViewController.swift */; };
+		7D3F7AB72689F88B009522A0 /* ResultQuestionNumberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3F7AB62689F88B009522A0 /* ResultQuestionNumberTableViewCell.swift */; };
 		7D48E91E267CBEFD00E4B21D /* Player_Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48E91D267CBEFD00E4B21D /* Player_Model.swift */; };
 		7D54C8502670E1F1008D3B81 /* Base_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54C84F2670E1F1008D3B81 /* Base_ViewController.swift */; };
 		7D54C8532670E5DA008D3B81 /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D54C8522670E5DA008D3B81 /* AppConstant.swift */; };
@@ -30,6 +34,10 @@
 /* Begin PBXFileReference section */
 		7D1A8B972682D5AE00A2C5A2 /* Player_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player_ViewController.swift; sourceTree = "<group>"; };
 		7D3A0BEF2680C5400070801B /* Player_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player_TableViewCell.swift; sourceTree = "<group>"; };
+		7D3F7AAD2689E715009522A0 /* Question_Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question_Model.swift; sourceTree = "<group>"; };
+		7D3F7AB02689E7FA009522A0 /* Answer_Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer_Model.swift; sourceTree = "<group>"; };
+		7D3F7AB32689F863009522A0 /* ResultQuestionNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultQuestionNumberViewController.swift; sourceTree = "<group>"; };
+		7D3F7AB62689F88B009522A0 /* ResultQuestionNumberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultQuestionNumberTableViewCell.swift; sourceTree = "<group>"; };
 		7D48E91D267CBEFD00E4B21D /* Player_Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player_Model.swift; sourceTree = "<group>"; };
 		7D54C84F2670E1F1008D3B81 /* Base_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base_ViewController.swift; sourceTree = "<group>"; };
 		7D54C8522670E5DA008D3B81 /* AppConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
@@ -88,6 +96,8 @@
 				7D54C85E2670EE8A008D3B81 /* SetQ_Model.swift */,
 				7D6541D526777FFB009A6734 /* JoiningModel.swift */,
 				7D48E91D267CBEFD00E4B21D /* Player_Model.swift */,
+				7D3F7AAD2689E715009522A0 /* Question_Model.swift */,
+				7D3F7AB02689E7FA009522A0 /* Answer_Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -160,6 +170,8 @@
 			children = (
 				7DC93D1C26836B160092F33D /* PlayGame_ViewController.swift */,
 				7D7EBC462686F6DB00F958F9 /* PlayGame_TableViewCell.swift */,
+				7D3F7AB32689F863009522A0 /* ResultQuestionNumberViewController.swift */,
+				7D3F7AB62689F88B009522A0 /* ResultQuestionNumberTableViewCell.swift */,
 			);
 			path = PlayGame;
 			sourceTree = "<group>";
@@ -290,14 +302,18 @@
 				7D48E91E267CBEFD00E4B21D /* Player_Model.swift in Sources */,
 				7D77EC2E266E319D00EFBCCD /* Register_ViewController.swift in Sources */,
 				7D54C8532670E5DA008D3B81 /* AppConstant.swift in Sources */,
+				7D3F7AB42689F863009522A0 /* ResultQuestionNumberViewController.swift in Sources */,
+				7D3F7AB72689F88B009522A0 /* ResultQuestionNumberTableViewCell.swift in Sources */,
 				7D6541D626777FFB009A6734 /* JoiningModel.swift in Sources */,
 				7D54C8502670E1F1008D3B81 /* Base_ViewController.swift in Sources */,
 				7D1A8B982682D5AE00A2C5A2 /* Player_ViewController.swift in Sources */,
 				7D77EC2A266E319D00EFBCCD /* AppDelegate.swift in Sources */,
+				7D3F7AAE2689E715009522A0 /* Question_Model.swift in Sources */,
 				7D54C85F2670EE8A008D3B81 /* SetQ_Model.swift in Sources */,
 				7D7EBC472686F6DB00F958F9 /* PlayGame_TableViewCell.swift in Sources */,
 				7D54C85B2670E76B008D3B81 /* BaseService.swift in Sources */,
 				7DC93D1D26836B160092F33D /* PlayGame_ViewController.swift in Sources */,
+				7D3F7AB12689E7FA009522A0 /* Answer_Model.swift in Sources */,
 				7D54C8572670E740008D3B81 /* Joining_Service.swift in Sources */,
 				7D77EC2C266E319D00EFBCCD /* SceneDelegate.swift in Sources */,
 			);
