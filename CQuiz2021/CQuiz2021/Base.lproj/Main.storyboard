@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eXu-eg-xmA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eXu-eg-xmA">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -485,7 +486,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K69-2K-ypg">
-                                                            <rect key="frame" x="15" y="5" width="289" height="50"/>
+                                                            <rect key="frame" x="60" y="5" width="244" height="50"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -499,18 +500,37 @@
                                                             <color key="textColor" systemColor="systemPinkColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wEK-Wj-O3Y" userLabel="Medal Icon View">
+                                                            <rect key="frame" x="10" y="3.5" width="40" height="53"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rvw-Vv-pBv">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="53"/>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="Rvw-Vv-pBv" firstAttribute="top" secondItem="wEK-Wj-O3Y" secondAttribute="top" id="4bS-LU-hOc"/>
+                                                                <constraint firstAttribute="width" constant="40" id="5Qs-Jt-BhV"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Rvw-Vv-pBv" secondAttribute="trailing" id="HDm-wr-mL8"/>
+                                                                <constraint firstItem="Rvw-Vv-pBv" firstAttribute="leading" secondItem="wEK-Wj-O3Y" secondAttribute="leading" id="dHH-Y9-9IP"/>
+                                                                <constraint firstAttribute="bottom" secondItem="Rvw-Vv-pBv" secondAttribute="bottom" id="uuN-Rt-Kub"/>
+                                                                <constraint firstAttribute="height" constant="53" id="xYS-on-PaA"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="3LS-SX-v6v" secondAttribute="bottom" constant="5" id="0an-UG-jPn"/>
                                                         <constraint firstAttribute="bottom" secondItem="K69-2K-ypg" secondAttribute="bottom" constant="5" id="7Gm-zd-rUw"/>
                                                         <constraint firstAttribute="trailing" secondItem="3LS-SX-v6v" secondAttribute="trailing" constant="5" id="A9u-8b-rsM"/>
-                                                        <constraint firstItem="K69-2K-ypg" firstAttribute="leading" secondItem="pQp-xB-tW0" secondAttribute="leading" constant="15" id="GgJ-MX-Cd0"/>
+                                                        <constraint firstItem="K69-2K-ypg" firstAttribute="leading" secondItem="wEK-Wj-O3Y" secondAttribute="trailing" constant="10" id="MO3-Xp-tUm"/>
+                                                        <constraint firstItem="wEK-Wj-O3Y" firstAttribute="leading" secondItem="pQp-xB-tW0" secondAttribute="leading" constant="10" id="TVb-0X-MMY"/>
+                                                        <constraint firstItem="wEK-Wj-O3Y" firstAttribute="centerY" secondItem="pQp-xB-tW0" secondAttribute="centerY" id="Tul-SM-eLt"/>
                                                         <constraint firstItem="3LS-SX-v6v" firstAttribute="top" secondItem="pQp-xB-tW0" secondAttribute="top" constant="5" id="eSJ-ey-RTB"/>
                                                         <constraint firstItem="3LS-SX-v6v" firstAttribute="leading" secondItem="K69-2K-ypg" secondAttribute="trailing" constant="5" id="lk7-kf-gB5"/>
                                                         <constraint firstItem="K69-2K-ypg" firstAttribute="top" secondItem="pQp-xB-tW0" secondAttribute="top" constant="5" id="v7F-IM-4u2"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
+                                                    <outlet property="imgMedal" destination="Rvw-Vv-pBv" id="SeY-bR-aQ6"/>
                                                     <outlet property="lblDiem" destination="3LS-SX-v6v" id="s1a-9e-L9U"/>
                                                     <outlet property="lblName" destination="K69-2K-ypg" id="gMz-eU-IfC"/>
                                                 </connections>

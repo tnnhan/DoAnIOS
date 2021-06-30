@@ -116,36 +116,30 @@ class PlayGame_ViewController: Base_ViewController {
     func socketPlayGame(){
         let socket = manager.defaultSocket
         socket.on("S_SendResultQuestionNumber_C") { [self] data, ack in
-            print(data)
+            print("Result for Single question: \(data)")
+            
+            var resultArr:[ResultQuestion] = []
+            let nSArray = data as NSArray
+            for item in (nSArray[0] as! NSArray) {
+                let disArray = item as! NSDictionary
+                let resultQuestion = ResultQuestion(
+                    disArray["player_id"] as! String,
+                    disArray["player_nickname"] as! String,
+                    disArray["point"] as! Int,
+                    disArray["question_id"] as! String,
+                    disArray["setq_id"] as! String)
+                resultArr.append(resultQuestion)
+            }
             let sb = UIStoryboard(name: "Main", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "ResultQuestionNumberViewController") as! ResultQuestionNumberViewController
+            vc.resultQuestionArr = resultArr
             self.navigationController?.pushViewController(vc, animated: true)
-//            self.playerArr = []
-//            let nSArray = data as NSArray
-//            for item in (nSArray[0] as! NSArray) {
-//                let disArray = item as! NSDictionary
-//                let player =  Player(disArray["player_nickname"] as! String,disArray["setq_id"] as! String,disArray["player_avatar"] as! String,disArray["player_flag"] as! Int)
-//                playerArr.append(player)
-            }
-//            lblPlayers.text = String(playerArr.count)
-//            let gradient = getGradientLayer(bounds: lblPlayers.bounds)
-//            lblPlayers.textColor = gradientColor(bounds: lblPlayers.bounds, gradientLayer: gradient)
-//            //prevent flickers
-//            UIView.performWithoutAnimation {
-//                self.tbvPlayer.reloadData()
-//                self.tbvPlayer.beginUpdates()
-//                self.tbvPlayer.endUpdates()
-////                DispatchQueue.main.async {
-////                    let indexPath = IndexPath(row: self.playerArr.count-1, section: 0)
-////                    self.tbvPlayer.scrollToRow(at: indexPath, at: .bottom, animated: true)
-////                }
-//            }
-//        }
+        }
         socket.on("CountDownQuestion") {data, ack in
             self.title = "Bạn còn \(data[0] as! Int) giây"
             self.time = data[0] as! Int
         }
         socket.connect()
-    }
     
+    }
 }

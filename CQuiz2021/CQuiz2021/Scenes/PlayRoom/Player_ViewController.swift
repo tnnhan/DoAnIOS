@@ -94,7 +94,7 @@ class Player_ViewController: Base_ViewController, UITableViewDelegate, UITableVi
             }
         }
         socket.on("PlayGame") {data, ack in
-           
+            self.answerArr.removeAll()
             let nSArray = data as NSArray
                 let resultArray = nSArray[0] as! NSArray
                 let disArray = resultArray[0] as! NSDictionary
